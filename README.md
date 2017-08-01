@@ -36,7 +36,7 @@ cd spring-stream-poc-consumer/
 execute one producer in a console:
 ```sh
 cd spring-stream-poc-producer/
-./gradlew bootRun
+SPRING_PROFILES_ACTIVE=four ./gradlew bootRun
 ```
 
 execute first consumer in a different console:
