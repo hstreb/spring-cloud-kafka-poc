@@ -1,0 +1,14 @@
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092,localhost:9093,localhost:9094
+          zkNodes: localhost:2181
+          replicationFactor: 3
+      bindings:
+        topic_out:
+          destination: test4
+          partitionCount: 4
+server:
+  port: 0
