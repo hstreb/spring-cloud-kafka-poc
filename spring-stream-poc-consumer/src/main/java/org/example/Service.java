@@ -7,7 +7,7 @@ public class Service {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Service.class);
 
-    public void consume(String message) throws InterruptedException {
+    public void consume(Message message) throws InterruptedException {
         LOGGER.info("message received '{}'", message);
     }
 

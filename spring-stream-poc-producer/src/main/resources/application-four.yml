@@ -9,6 +9,8 @@ spring:
       bindings:
         topic_out:
           destination: test4
-          partitionCount: 4
+          producer:
+            partitionCount: 4
+            partitionKeyExpression: payload.id
 server:
   port: 0

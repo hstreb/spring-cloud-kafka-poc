@@ -12,7 +12,7 @@ services:
       - kafka-3
     environment:
       - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=localhost:19092,localhost:29092,localhost:39092
-      - SPRING_CLOUD_STREAM_KAFKA_BINDER_ZKNODES=localhost:12181,localhost:22181,localhost:32181
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_ZKNODES=localhost:22181,localhost:32181,localhost:42181
     network_mode: host
     extra_hosts:
       - "moby:127.0.0.1"
@@ -28,7 +28,7 @@ services:
       - kafka-3
     environment:
       - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=localhost:19092,localhost:29092,localhost:39092
-      - SPRING_CLOUD_STREAM_KAFKA_BINDER_ZKNODES=localhost:12181,localhost:22181,localhost:32181
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_ZKNODES=localhost:22181,localhost:32181,localhost:42181
     network_mode: host
     extra_hosts:
       - "moby:127.0.0.1"
@@ -74,7 +74,6 @@ services:
 
   kafka-1:
     image: confluentinc/cp-kafka:latest
-    network_mode: host
     depends_on:
       - zookeeper-1
       - zookeeper-2
@@ -83,12 +82,13 @@ services:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: localhost:22181,localhost:32181,localhost:42181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:19092
+      JMX_PORT: 19999
+    network_mode: host
     extra_hosts:
       - "moby:127.0.0.1"
 
   kafka-2:
     image: confluentinc/cp-kafka:latest
-    network_mode: host
     depends_on:
       - zookeeper-1
       - zookeeper-2
@@ -97,12 +97,13 @@ services:
       KAFKA_BROKER_ID: 2
       KAFKA_ZOOKEEPER_CONNECT: localhost:22181,localhost:32181,localhost:42181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:29092
+      JMX_PORT: 29999
+    network_mode: host
     extra_hosts:
       - "moby:127.0.0.1"
 
   kafka-3:
     image: confluentinc/cp-kafka:latest
-    network_mode: host
     depends_on:
       - zookeeper-1
       - zookeeper-2
@@ -111,5 +112,7 @@ services:
       KAFKA_BROKER_ID: 3
       KAFKA_ZOOKEEPER_CONNECT: localhost:22181,localhost:32181,localhost:42181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:39092
+      JMX_PORT: 39999
+    network_mode: host
     extra_hosts:
       - "moby:127.0.0.1"

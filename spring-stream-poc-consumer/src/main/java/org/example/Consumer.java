@@ -13,7 +13,7 @@ public class Consumer {
     }
 
     @ServiceActivator(inputChannel = Topic.INPUT_TOPIC)
-    public void consume(String message) {
+    public void consume(Message message) {
         try {
             service.consume(message);
         } catch (InterruptedException e) {

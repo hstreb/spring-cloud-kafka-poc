@@ -1,7 +1,31 @@
 # example using spring-cloud-stream
 This example uses spring-cloud-stream to produce and consume messages from Kafka, with partitioned topic.
 
-# setup kafka multi broker
+# build the projects
+
+```sh
+cd spring-stream-poc-producer/
+./gradlew clean build
+```
+
+```sh
+cd spring-stream-poc-consumer/
+./gradlew clean build
+```
+
+# run with docker
+
+```
+docker-compose up
+```
+
+Run with four partitions:
+
+```
+docker-compose -f docker-compose-four.yaml up
+```
+
+# Run without docker
 See [kafka quickstart](https://kafka.apache.org/quickstart#quickstart_multibroker).
 
 Create two partitioned topics:
@@ -14,17 +38,7 @@ bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 -
 ```
 
 # run with 2 partitions:
-execute one producer in a console:
-```sh
-cd spring-stream-poc-producer/
-./gradlew bootRun
-```
 
-execute first consumer in a different console:
-```sh
-cd spring-stream-poc-consumer/
-./gradlew bootRun
-```
 
 execute second consumer in a different console:
 ```sh

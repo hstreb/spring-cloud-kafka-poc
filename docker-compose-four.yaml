@@ -1,6 +1,24 @@
 version: '2.1'
 
 services:
+
+  producer:
+    build: ./spring-stream-poc-producer/
+    depends_on:
+      - zookeeper-1
+      - zookeeper-2
+      - zookeeper-3
+      - kafka-1
+      - kafka-2
+      - kafka-3
+    environment:
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=localhost:19092,localhost:29092,localhost:39092
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_ZKNODES=localhost:12181,localhost:22181,localhost:32181
+      - SPRING_PROFILES_ACTIVE=four
+    network_mode: host
+    extra_hosts:
+      - "moby:127.0.0.1"
+
   consumer-1:
     build: ./spring-stream-poc-consumer/
     depends_on:
@@ -10,6 +28,7 @@ services:
       - kafka-1
       - kafka-2
       - kafka-3
+      - producer
     environment:
       - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=localhost:19092,localhost:29092,localhost:39092
       - SPRING_CLOUD_STREAM_KAFKA_BINDER_ZKNODES=localhost:12181,localhost:22181,localhost:32181
@@ -27,6 +46,7 @@ services:
       - kafka-1
       - kafka-2
       - kafka-3
+      - producer
     environment:
       - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=localhost:19092,localhost:29092,localhost:39092
       - SPRING_CLOUD_STREAM_KAFKA_BINDER_ZKNODES=localhost:12181,localhost:22181,localhost:32181
@@ -44,6 +64,7 @@ services:
       - kafka-1
       - kafka-2
       - kafka-3
+      - producer
     environment:
       - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=localhost:19092,localhost:29092,localhost:39092
       - SPRING_CLOUD_STREAM_KAFKA_BINDER_ZKNODES=localhost:12181,localhost:22181,localhost:32181
@@ -61,23 +82,7 @@ services:
       - kafka-1
       - kafka-2
       - kafka-3
-    environment:
-      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=localhost:19092,localhost:29092,localhost:39092
-      - SPRING_CLOUD_STREAM_KAFKA_BINDER_ZKNODES=localhost:12181,localhost:22181,localhost:32181
-      - SPRING_PROFILES_ACTIVE=four
-    network_mode: host
-    extra_hosts:
-      - "moby:127.0.0.1"
-
-  producer:
-    build: ./spring-stream-poc-producer/
-    depends_on:
-      - zookeeper-1
-      - zookeeper-2
-      - zookeeper-3
-      - kafka-1
-      - kafka-2
-      - kafka-3
+      - producer
     environment:
       - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=localhost:19092,localhost:29092,localhost:39092
       - SPRING_CLOUD_STREAM_KAFKA_BINDER_ZKNODES=localhost:12181,localhost:22181,localhost:32181

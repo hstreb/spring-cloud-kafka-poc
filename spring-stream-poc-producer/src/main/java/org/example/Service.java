@@ -22,8 +22,8 @@ public class Service {
         int numberMessages = random.nextInt(5);
         for (int i = 0; i < numberMessages; i++) {
             Thread.sleep(random.nextInt(1000));
-            String message = "Message " + i + " from producer " + LocalDateTime.now();
-            LOGGER.info(message);
+            Message message = new Message(numberMessages + "", "Message " + i + " from producer " + LocalDateTime.now());
+            LOGGER.info(message.toString());
             producer.send(message);
         }
     }

@@ -12,7 +12,7 @@ public class Producer {
         this.topic = topic;
     }
 
-    public void send(String message) {
+    public void send(Message message) {
         topic.send().send(MessageBuilder.withPayload(message).build());
     }
 
